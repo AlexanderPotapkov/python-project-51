@@ -4,3 +4,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/0e7d57ed4a01c6d2ee27/maintainability)](https://codeclimate.com/github/AlexanderPotapkov/python-project-51/maintainability)
 
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0e7d57ed4a01c6d2ee27/test_coverage)](https://codeclimate.com/github/AlexanderPotapkov/python-project-51/test_coverage)
+
+first step
+<a href="https://asciinema.org/a/531999" target="_blank"><img src="https://asciinema.org/a/531999.svg" /></a>
