@@ -1,6 +1,8 @@
+import os
 import pathlib
 import requests
 import re
+from bs4 import BeautifulSoup
 
 
 def download(url, output=pathlib.Path.cwd()):
@@ -11,4 +13,8 @@ def download(url, output=pathlib.Path.cwd()):
         file_name = re.sub(r'\W', '-', url[8::])
     with open(f'{output}/{file_name}.html', 'w', encoding='utf-8') as f:
         f.write(save_file)
+    os.mkdir(f'{output}/{file_name} _files')
     return f'{output}/{file_name}.html'
+
+
+# def get_img(): Create DIR!!!
