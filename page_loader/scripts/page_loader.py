@@ -10,7 +10,7 @@ def get_parser():
                                      conflict_handler='resolve')
     parser.add_argument('url', type=str, help='name of website address')
     parser.add_argument('-o', '--output', default=pathlib.Path.cwd(),
-                        help='output directory')
+                        help='output directory (default=root dir)')
 
     args = parser.parse_args()
     return args
