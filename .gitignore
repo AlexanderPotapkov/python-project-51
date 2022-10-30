@@ -9,5 +9,3 @@ coverage.xml
 .vim
 .idea
 tmp
-*.html
-*._files
