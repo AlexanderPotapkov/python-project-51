@@ -34,21 +34,22 @@ def get_url_without_dashes(url):
     return ''.join(new_url)
 
 
+def get_html_name(url):
+    filename = get_url_without_dashes(remove_scheme(remove_extra_symbols(url)))
+
+    return filename + '.html'
+
 def get_dir_name(url):
     filename = get_url_without_dashes(remove_scheme(remove_extra_symbols(url)))
 
     return filename + '_files'
 
 
-def get_file_name(url, is_output_file=False):
+def get_file_name(url):
     name = []
     new_url = remove_scheme(remove_extra_symbols(url))
-    if is_output_file or (PurePosixPath(new_url).suffix and not is_output_file):
+    if PurePosixPath(new_url):
         new_url, suffix = os.path.splitext(new_url)
-    else:
-        suffix = '.html'
-    name.append(get_url_without_dashes(new_url))
-    name.append(suffix)
-    if is_output_file:
-        name.append('.html')
+        name.append(get_url_without_dashes(new_url))
+        name.append(suffix)
     return ''.join(name)

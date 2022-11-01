@@ -2,7 +2,8 @@ import os
 
 
 def create_dir_for_files(path_to_files_dir):
-    os.mkdir(path_to_files_dir)
+    if not os.path.exists(path_to_files_dir):
+        os.mkdir(path_to_files_dir)
 
 
 def save_file(path, data):
