@@ -39,6 +39,7 @@ def get_html_name(url):
 
     return filename + '.html'
 
+
 def get_dir_name(url):
     filename = get_url_without_dashes(remove_scheme(remove_extra_symbols(url)))
 
@@ -53,3 +54,8 @@ def get_file_name(url):
         name.append(get_url_without_dashes(new_url))
         name.append(suffix)
     return ''.join(name)
+
+
+def get_name_from_tag(tag_object):
+    tag_object.name = 'img'
+    return tag_object.get('src'), tag_object.name

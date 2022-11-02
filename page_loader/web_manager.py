@@ -4,12 +4,7 @@ from urllib.parse import urlparse
 
 from page_loader.change import change_path
 from page_loader.file_manager import save_file
-from page_loader.name import get_file_name, get_absolute_url, get_path
-
-
-def get_name_from_tag(tag_object):
-    tag_object.name = 'img'
-    return tag_object.get('src'), tag_object.name
+from page_loader.name import get_file_name, get_absolute_url, get_path, get_name_from_tag
 
 
 def get_response(url):
@@ -41,4 +36,3 @@ def download_resources(url, parsed_data, get_dir_name):
         resource_content = resource_response.content
         save_file(file_path, resource_content)
         change_path(resource_tag, tag_name, file_path)
-        print(file_path)
