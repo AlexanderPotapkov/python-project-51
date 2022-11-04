@@ -2,6 +2,7 @@
 
 import argparse
 import pathlib
+
 from page_loader.loader import download
 
 
@@ -13,6 +14,7 @@ def get_parser():
                         help='output directory (default=root dir)')
 
     args = parser.parse_args()
+
     return args
 
 
