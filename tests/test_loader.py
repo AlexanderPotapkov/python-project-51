@@ -1,6 +1,6 @@
-import os.path
 import requests_mock
 
+from os.path import exists, join
 from tempfile import TemporaryDirectory
 
 from page_loader.loader import download
@@ -15,11 +15,11 @@ def test_download():
         text_html = test_html.read()
 
     with TemporaryDirectory() as temp_dir:
-        expected_patch = os.path.join(temp_dir, expected_page_name)
+        expected_patch = join(temp_dir, expected_page_name)
         with requests_mock.Mocker() as mock:
             mock.get(url, text=text_html)
             received_patch = download(url, temp_dir)
-        if os.path.exists(received_patch):
+        if exists(received_patch):
             file_presence = True
 
     current_name = received_patch.split('/')[-1]

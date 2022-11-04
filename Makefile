@@ -19,7 +19,8 @@ test:
 	poetry run pytest
 
 test-coverage:
-	poetry run pytest --cov=page_loader --cov-report xml
+	poetry run coverage run -m pytest
+	poetry run coverage xml
 
 publish:
 	poetry publish --dry-run
