@@ -1,8 +1,10 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "Third project. Page loader"
+classifiers = ["Programming language :: Python :: 3.8"]
 authors = ["alexander_potapkov <xanben@mail.ru>"]
+repository = "https://github.com/AlexanderPotapkov/python-project-51"
 readme = "README.md"
 packages = [
     {include = "page_loader"},
@@ -12,6 +14,7 @@ packages = [
 python = "^3.8"
 bs4 = "^0.0.1"
 mock = "^4.0.3"
+progress = "^1.6"
 
 
 [tool.poetry.group.dev.dependencies]
