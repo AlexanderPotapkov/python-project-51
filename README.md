@@ -25,11 +25,9 @@ The downloaded HTML page is saved by default 'os.getcwd()'
 ```
     page-loader name-of-website
 ```
-<a href="https://asciinema.org/a/535114" target="_blank"><img src="https://asciinema.org/a/535114.svg" /></a>
-
+<a href="https://asciinema.org/a/537274" target="_blank"><img src="https://asciinema.org/a/537274.svg" /></a>
 If the --output flag is specified, then after it you need to specify the path to the desired directory. If the directory does not exist, it will be created.
 ```
     page-loader --output name-of-directory name-of-website
 ```
-<a href="https://asciinema.org/a/535117" target="_blank"><img src="https://asciinema.org/a/535117.svg" /></a>
-
+<a href="https://asciinema.org/a/537276" target="_blank"><img src="https://asciinema.org/a/537276.svg" /></a>
