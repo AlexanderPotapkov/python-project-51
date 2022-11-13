@@ -3,13 +3,21 @@ import string
 from urllib.parse import urlparse
 
 
+def remove_extra_symbols(url):
+    if url.endswith('/'):
+        url = url[:-1]
+    if not url[0].isalnum():
+        url = url[1:]
+    return url
+
+
 def get_file_name(url):
     """
     :param url: url address
     :return: new file name
     """
-    netloc = urlparse(url).netloc
-    path = urlparse(url).path
+    netloc = urlparse(remove_extra_symbols(url)).netloc
+    path = urlparse(remove_extra_symbols(url)).path
     if path:
         path = path if path[0] == '/' else f'/{path}'
     file_name = path.split('/')[-1]

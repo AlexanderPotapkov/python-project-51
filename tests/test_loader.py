@@ -21,7 +21,7 @@ HEAD_ALL = {'Content-Type': 'all'}
 
 def test_page_loader_download(
         text_html,
-        img1_content,
+        img_content,
         css_content,
         js_content
 ):
@@ -31,7 +31,7 @@ def test_page_loader_download(
         expected_path = join(temp_dir, EXPECTED_FILE_NAME)
         with requests_mock.Mocker() as mock:
             mock.get(URL, text=text_html, headers=HEAD_TXT)
-            mock.get(IMG_PATH, content=img1_content, headers=HEAD_ALL)
+            mock.get(IMG_PATH, content=img_content, headers=HEAD_ALL)
             mock.get(CSS_PATH, content=css_content, headers=HEAD_ALL)
             mock.get(JS_PATH, content=js_content, headers=HEAD_ALL)
             received_path = download(URL, temp_dir)
@@ -47,7 +47,7 @@ def test_page_loader_download(
 
 def test_page_loader_files(
         text_html,
-        img1_content,
+        img_content,
         css_content,
         js_content
 ):
@@ -57,7 +57,7 @@ def test_page_loader_files(
     with TemporaryDirectory() as temp_dir:
         with requests_mock.Mocker() as mock:
             mock.get(URL, text=text_html, headers=HEAD_TXT)
-            mock.get(IMG_PATH, content=img1_content, headers=HEAD_ALL)
+            mock.get(IMG_PATH, content=img_content, headers=HEAD_ALL)
             mock.get(CSS_PATH, content=css_content, headers=HEAD_ALL)
             mock.get(JS_PATH, content=js_content, headers=HEAD_ALL)
             received_patch = download(URL, temp_dir)
@@ -66,7 +66,7 @@ def test_page_loader_files(
 
         path = join(temp_dir, EXPECTED_DIR_NAME)
         list_file = listdir(path)
-        list_content = {img1_content, css_content, js_content}
+        list_content = {img_content, css_content, js_content}
         exp_list_content = set()
         for item in list_file:
             with open(join(path, item), 'rb') as f:

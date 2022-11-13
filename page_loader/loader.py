@@ -1,4 +1,3 @@
-import logging
 import requests
 
 from os.path import abspath, join
@@ -8,6 +7,10 @@ from urllib.parse import urlparse
 from page_loader.file_manager import mk_dir, save_file
 from page_loader.web_manager import download_resources
 from page_loader.namer import get_file_name
+
+from page_loader.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 def get_content(url):
@@ -21,12 +24,12 @@ def get_content(url):
     try:
         response = requests.get(url)
     except requests.RequestException as expt:
-        logging.error(f'Connection error: {expt}')
+        logger.error(f'Connection error: {expt}')
         raise ConnectionError(f'Connection error: {expt}')
     if response.status_code != requests.codes.ok:
-        logging.error(f'Link unavailable. {response.status_code}')
+        logger.error(f'Link unavailable. {response.status_code}')
         raise ConnectionError(f'Link unavailable. {response.status_code}')
-    logging.info(f'File {url} received.')
+    logger.info(f'File {url} received.')
     conn_type = response.headers.get('Content-Type')
     if conn_type and 'text/html' in conn_type:
         response.encoding = 'utf-8'
@@ -58,13 +61,13 @@ def download(url, output):
             resources = get_content(url['link'])
             save_file(join(output, url['path']), resources)
         except ConnectionError as expt:
-            logging.debug(f'Resource {url} is not loaded. {expt}')
+            logger.debug(f'Resource {url} is not loaded. {expt}')
             continue
         except OSError:
-            logging.info(f'Resource {url} is not saved.')
+            logger.info(f'Resource {url} is not saved.')
             progress_bar.next()
             continue
-        logging.info(f'Resource {url} saved.')
+        logger.info(f'Resource {url} saved.')
         progress_bar.next()
     progress_bar.finish()
 

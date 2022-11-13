@@ -1,7 +1,9 @@
-import logging
-
 from os import mkdir
 from os.path import exists
+
+from page_loader.logger import get_logger
+
+logger = get_logger(__name__)
 
 
 def save_file(file_path, content):
@@ -15,11 +17,11 @@ def save_file(file_path, content):
         with open(file_path, flag) as res_file:
             res_file.write(content)
     except FileNotFoundError as expt:
-        logging.exception(f'File not saved. Error: {expt}')
+        logger.exception(f'File not saved. Error: {expt}')
         raise FileNotFoundError(f'File not saved. Error: {expt}')
     except TypeError as expt:
-        logging.exception(f'File not saved. Error: {expt}')
-    logging.info(f'File {file_path} saved.')
+        logger.exception(f'File not saved. Error: {expt}')
+    logger.info(f'File {file_path} saved.')
 
 
 def mk_dir(output):
@@ -31,5 +33,5 @@ def mk_dir(output):
         try:
             mkdir(output)
         except OSError:
-            logging.error('Failed to create resource folder.')
+            logger.error('Failed to create resource folder.')
             raise FileNotFoundError('Failed to create resource folder.')
