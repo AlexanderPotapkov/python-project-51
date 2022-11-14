@@ -5,11 +5,19 @@ from urllib.parse import urlparse
 
 
 def remove_schema(url):
+    '''
+    :param url:  url address
+    :return: url without schema
+    '''
     parsed_url = urlparse(url)
     return parsed_url.netloc + parsed_url.path
 
 
 def remove_extra_symbols(url):
+    '''
+    :param url:   url address
+    :return: url without "/" in the end of string
+    '''
     if url.endswith('/'):
         url = url[:-1]
     if not url[0].isalnum():

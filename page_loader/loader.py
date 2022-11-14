@@ -20,12 +20,10 @@ def get_content(url):
 
     try:
         response = requests.get(url)
-    except requests.RequestException as expt:
+        response.raise_for_status()
+    except Exception as expt:
         logging.error(f'Connection error: {expt}')
         raise ConnectionError(f'Connection error: {expt}')
-    if response.status_code != requests.codes.ok:
-        logging.error(f'Link unavailable. {response.status_code}')
-        raise ConnectionError(f'Link unavailable. {response.status_code}')
     logging.info(f'File {url} received.')
     conn_type = response.headers.get('Content-Type')
     if conn_type and 'text/html' in conn_type:
@@ -44,14 +42,14 @@ def download(url, output):
 
     path_name = get_file_name(url)
     path_name = join(output, path_name)
-    dir_name = get_dir_name(url, output)
+    dir_path = get_dir_name(url, output)
 
     text_html = get_content(url)
-    urls, text_html = download_resources(url, text_html, dir_name)
+    urls, text_html = download_resources(url, text_html, dir_path)
 
     save_file(path_name, text_html)
 
-    mk_dir(dir_name)
+    mk_dir(dir_path)
     progress_bar = Bar('Saving: ', max=len(urls))
     for url in urls:
         try:
