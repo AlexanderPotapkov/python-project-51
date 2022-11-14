@@ -42,14 +42,14 @@ def download(url, output):
     :return: full path to download files
     """
 
-    path_to_html = get_file_name(url)
-    path_to_html = join(output, path_to_html)
-    dir_name = f'{path_to_html[:-5]}_files'
+    path_name = get_file_name(url)
+    path_name = join(output, path_name)
+    dir_name = f'{path_name[:-5]}_files'
 
     text_html = get_content(url)
     urls, text_html = download_resources(url, text_html, dir_name)
 
-    save_file(path_to_html, text_html)
+    save_file(path_name, text_html)
 
     mk_dir(dir_name)
     progress_bar = Bar('Saving: ', max=len(urls))
@@ -68,4 +68,4 @@ def download(url, output):
         progress_bar.next()
     progress_bar.finish()
 
-    return abspath(path_to_html)
+    return abspath(path_name)
