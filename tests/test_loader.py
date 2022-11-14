@@ -6,7 +6,7 @@ from os.path import exists, join
 from tempfile import TemporaryDirectory
 
 from page_loader.loader import download
-from page_loader.namer import get_file_name, get_dir_name
+from page_loader.namer import get_file_name
 
 EXPECTED_FILE_NAME = 'www-test-com.html'
 EXPECTED_DIR_NAME = 'www-test-com_files'
