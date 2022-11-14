@@ -6,7 +6,7 @@ from os.path import exists, join
 from tempfile import TemporaryDirectory
 
 from page_loader.loader import download
-from page_loader.namer import get_file_name
+from page_loader.namer import get_file_name, get_dir_name
 
 EXPECTED_FILE_NAME = 'www-test-com.html'
 EXPECTED_DIR_NAME = 'www-test-com_files'
@@ -80,10 +80,10 @@ def test_page_loader_files(
 def test_page_loader_exceptions():
     with TemporaryDirectory() as temp_dir:
         with pytest.raises(FileNotFoundError):
-            download('https://google.com', 'Непонятная_папка')
+            download('https://google.com', 'wrong_folder')
 
         with pytest.raises(ValueError):
-            download('Непонятный_сайт.', temp_dir)
+            download('wrong_site.', temp_dir)
 
         with pytest.raises(ConnectionError):
             with requests_mock.Mocker() as mock:

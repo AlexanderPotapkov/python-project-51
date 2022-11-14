@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 
 from page_loader.file_manager import mk_dir, save_file
 from page_loader.web_manager import download_resources
-from page_loader.namer import get_file_name
+from page_loader.namer import get_file_name, get_dir_name
 
 
 def get_content(url):
@@ -44,7 +44,7 @@ def download(url, output):
 
     path_name = get_file_name(url)
     path_name = join(output, path_name)
-    dir_name = f'{path_name[:-5]}_files'
+    dir_name = get_dir_name(url, output)
 
     text_html = get_content(url)
     urls, text_html = download_resources(url, text_html, dir_name)

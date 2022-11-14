@@ -1,3 +1,4 @@
+import re
 import string
 
 from urllib.parse import urlparse
@@ -32,3 +33,13 @@ def get_file_name(url):
     file_name = [char if char in alpha_num else '-' for char in file_name]
     file_name = ''.join(file_name)
     return f'{file_name}.{ext}'
+
+
+def get_dir_name(url, output):
+    if url.startswith('http:'):
+        filename = re.sub(r'\W', '-', url[7::])
+    elif url.startswith('https:'):
+        filename = re.sub(r'\W', '-', url[8::])
+    else:
+        filename = re.sub(r'\W', '-', url)
+    return f'{output}/{filename}_files'
