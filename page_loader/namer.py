@@ -37,9 +37,9 @@ def get_file_name(url):
 
 def get_dir_name(url, output):
     if url.startswith('http:'):
-        filename = re.sub(r'\W', '-', url[7::])
+        filename = re.sub(r'\W', '-', remove_extra_symbols(url[7::]))
     elif url.startswith('https:'):
-        filename = re.sub(r'\W', '-', url[8::])
+        filename = re.sub(r'\W', '-', remove_extra_symbols(url[8::]))
     else:
-        filename = re.sub(r'\W', '-', url)
+        filename = re.sub(r'\W', '-', remove_extra_symbols(url))
     return f'{output}/{filename}_files'
