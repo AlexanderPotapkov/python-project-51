@@ -4,6 +4,11 @@ import string
 from urllib.parse import urlparse
 
 
+def remove_schema(url):
+    parsed_url = urlparse(url)
+    return parsed_url.netloc + parsed_url.path
+
+
 def remove_extra_symbols(url):
     if url.endswith('/'):
         url = url[:-1]
@@ -36,10 +41,5 @@ def get_file_name(url):
 
 
 def get_dir_name(url, output):
-    if url.startswith('http:'):
-        filename = re.sub(r'\W', '-', remove_extra_symbols(url[7::]))
-    elif url.startswith('https:'):
-        filename = re.sub(r'\W', '-', remove_extra_symbols(url[8::]))
-    else:
-        filename = re.sub(r'\W', '-', remove_extra_symbols(url))
+    filename = re.sub(r'\W', '-', remove_schema(remove_extra_symbols(url)))
     return f'{output}/{filename}_files'
