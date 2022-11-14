@@ -15,19 +15,18 @@ def download_resources(url, text_html, resource_dir):
     :param text_html: html-text
     :return: modified html-text and resource list
     """
-    tags = [
-        {'tag': 'img', 'attr': 'src'},
-        {'tag': 'link', 'attr': 'href'},
-        {'tag': 'script', 'attr': 'src'},
-    ]
+    tags = {'img': 'src',
+            'link': 'href',
+            'script': 'src'}
+
     html_page = urlparse(url)
     soup = BeautifulSoup(text_html, 'html.parser')
 
     resources_list = []
-    for tag in tags:
-        for element in soup.find_all(tag['tag']):
+    for tag, attr in tags.items():
+        for element in soup.find_all(tag):
             logging.debug(f'Checked: {element}')
-            url = element.attrs.get(tag['attr'])
+            url = element.attrs.get(attr)
             if url is None:
                 continue
             url = urlparse(url)
@@ -37,12 +36,12 @@ def download_resources(url, text_html, resource_dir):
 
             url = f'{html_page.scheme}://{html_page.netloc}{url.path}'
             file_name = get_file_name(url)
-            element[tag['attr']] = f'{basename(resource_dir)}/{file_name}'
+            element[attr] = f'{basename(resource_dir)}/{file_name}'
 
             resources_list.append(
                 {
                     'link': url,
-                    'path': element[tag['attr']],
+                    'path': element[attr],
                 },
             )
     return resources_list, soup.prettify()
