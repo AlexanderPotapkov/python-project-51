@@ -30,6 +30,12 @@ def mk_dir(output):
     if not exists(output):
         try:
             mkdir(output)
-        except OSError:
-            logging.error('Failed to create resource folder.')
-            raise FileNotFoundError('Failed to create resource folder.')
+        except FileExistsError:
+            pass
+        except PermissionError as error:
+            logging.error(f'Permission error: {error}')
+            raise PermissionError('You don\'t have permission!')
+
+        except OSError as e:
+            logging.error(f'Another error occured: {e}')
+            raise OSError('Couldn\'t create a directory for files!')

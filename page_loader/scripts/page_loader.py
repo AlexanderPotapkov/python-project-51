@@ -3,10 +3,12 @@
 import argparse
 import logging
 import pathlib
+import sys
 
-from page_loader import PageLoadingError
+from requests.exceptions import (ConnectionError, ConnectTimeout, HTTPError,
+                                 SSLError)
+
 from page_loader.loader import download
-from sys import exit
 
 
 def get_parser():
@@ -24,19 +26,33 @@ def get_parser():
 def main():
     args = get_parser()
     try:
-        file_path = download(args.url, args.output)
-        print(f'Page saved in {file_path}')
-    except PageLoadingError as e:
-        logging.error(e.error_message)
-        exit(1)
-    except PermissionError:
-        logging.error('Not enough access rights')
-        exit(1)
+        path_to_file = download(args.url, args.output)
     except FileNotFoundError:
-        logging.error('No such file or directory')
-        exit(1)
-    else:
-        exit(0)
+        logging.error('Error occurred! Output or files directory does not exist!')
+        sys.exit(1)
+    except PermissionError:
+        logging.error('Error occurred! You don\'t have permission!')
+        sys.exit(1)
+    except SSLError:
+        logging.error('SSL error occurred!')
+        sys.exit(1)
+    except HTTPError:
+        logging.error('HTTP error occurred!')
+        sys.exit(1)
+    except ConnectTimeout:
+        logging.error('Error occurred! Connection timeout!')
+        sys.exit(1)
+    except ConnectionError:
+        logging.error('Connection error occurred!')
+        sys.exit(1)
+    except OSError:
+        logging.error('Error occurred! Couldn\'t create a directory for files!')
+        sys.exit(1)
+    except Exception:
+        logging.error('An unexpected error has occurred!')
+        sys.exit(1)
+    print(f'Page was successfully downloaded into {path_to_file}')
+    sys.exit(0)
 
 
 if __name__ == '__main__':
