@@ -16,7 +16,7 @@ def get_content(url):
     :return: url content
     """
     if not urlparse(url).netloc:
-        raise ValueError('Incomplete address.')
+        raise ConnectionError('Incomplete address.')
 
     try:
         response = requests.get(url)

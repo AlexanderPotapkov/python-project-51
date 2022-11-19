@@ -82,7 +82,7 @@ def test_page_loader_exceptions():
         with pytest.raises(FileNotFoundError):
             download('https://google.com', 'wrong_folder')
 
-        with pytest.raises(ValueError):
+        with pytest.raises(ConnectionError):
             download('wrong_site.', temp_dir)
 
         with pytest.raises(ConnectionError):
