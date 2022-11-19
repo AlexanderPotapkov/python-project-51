@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 
 import argparse
+import logging
 import pathlib
 
+from page_loader import PageLoadingError
 from page_loader.loader import download
+from sys import exit
 
 
 def get_parser():
@@ -20,7 +23,20 @@ def get_parser():
 
 def main():
     args = get_parser()
-    print(download(args.url, args.output))
+    try:
+        file_path = download(args.url, args.output)
+        print(f'Page saved in {file_path}')
+    except PageLoadingError as e:
+        logging.error(e.error_message)
+        exit(1)
+    except PermissionError:
+        logging.error('Not enough access rights')
+        exit(1)
+    except FileNotFoundError:
+        logging.error('No such file or directory')
+        exit(1)
+    else:
+        exit(0)
 
 
 if __name__ == '__main__':
