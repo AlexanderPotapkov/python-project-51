@@ -31,3 +31,6 @@ If the --output flag is specified, then after it you need to specify the path to
     page-loader --output name-of-directory name-of-website
 ```
 <a href="https://asciinema.org/a/537276" target="_blank"><img src="https://asciinema.org/a/537276.svg" /></a>
+
+### Work with error
+<a href="https://asciinema.org/a/538912" target="_blank"><img src="https://asciinema.org/a/538912.svg" /></a>
