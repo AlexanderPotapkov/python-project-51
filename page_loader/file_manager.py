@@ -14,11 +14,19 @@ def save_file(file_path, content):
     try:
         with open(file_path, flag) as res_file:
             res_file.write(content)
+
     except FileNotFoundError as expt:
         logging.exception(f'File not saved. Error: {expt}')
         raise FileNotFoundError(f'File not saved. Error: {expt}')
+
     except TypeError as expt:
         logging.exception(f'File not saved. Error: {expt}')
+        raise FileNotFoundError(f'File not saved. Error: {expt}')
+
+    except PermissionError as expt:
+        logging.error(f'Permission error occurred: {expt}!')
+        raise PermissionError('You don\'t have permission!')
+
     logging.info(f'File {file_path} saved.')
 
 
