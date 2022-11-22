@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from page_loader.namer import get_file_name
 
 
-def download_resources(url, text_html, resource_dir):
+def gathering_resources(url, text_html, resource_dir):
     """
     :param resource_dir: dir for downloaded resources
     :param url: url address

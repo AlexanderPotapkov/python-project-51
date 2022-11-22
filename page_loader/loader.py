@@ -6,7 +6,7 @@ from progress.bar import Bar
 from urllib.parse import urlparse
 
 from page_loader.file_manager import mk_dir, save_file
-from page_loader.web_manager import download_resources
+from page_loader.web_manager import gathering_resources
 from page_loader.namer import get_file_name, get_dir_name
 
 
@@ -45,7 +45,7 @@ def download(url, output):
     dir_path = get_dir_name(url, output)
 
     text_html = get_content(url)
-    urls, text_html = download_resources(url, text_html, dir_path)
+    urls, text_html = gathering_resources(url, text_html, dir_path)
 
     save_file(path_name, text_html)
 
