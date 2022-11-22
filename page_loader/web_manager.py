@@ -40,12 +40,13 @@ def gathering_resources(url, text_html, resource_dir):
 
             url = f'{html_page.scheme}://{html_page.netloc}{url.path}'
             file_name = get_file_name(url)
-            element[attr] = f'{basename(resource_dir)}/{file_name}'
+            if element is not None:
+                element[attr] = f'{basename(resource_dir)}/{file_name}'
 
-            resources_list.append(
-                {
-                    'link': url,
-                    'path': element[attr],
-                },
-            )
+                resources_list.append(
+                    {
+                        'link': url,
+                        'path': element[attr],
+                    },
+                )
     return resources_list, soup.prettify()
