@@ -8,6 +8,10 @@ from bs4 import BeautifulSoup
 from page_loader.namer import get_file_name
 
 
+def is_domain(url, html_page):
+    return url.netloc != html_page.netloc and url.netloc != ''
+
+
 def gathering_resources(url, text_html, resource_dir):
     """
     :param resource_dir: dir for downloaded resources
@@ -30,7 +34,7 @@ def gathering_resources(url, text_html, resource_dir):
             if url is None:
                 continue
             url = urlparse(url)
-            if url.netloc != html_page.netloc and url.netloc != '':
+            if is_domain(url, html_page):
                 logging.debug('Link to another domain.')
                 continue
 
