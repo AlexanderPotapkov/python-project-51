@@ -6,8 +6,8 @@ from progress.bar import Bar
 from urllib.parse import urlparse
 
 from page_loader.file_manager import mk_dir, save_file
-from page_loader.web_manager import gathering_resources
-from page_loader.namer import get_file_name, get_dir_name
+from page_loader.html import gathering_resources
+from page_loader.urls import to_filename, to_dirname
 
 
 def get_content(url):
@@ -40,9 +40,9 @@ def download(url, output):
     :return: full path to download files
     """
 
-    path_name = get_file_name(url)
+    path_name = to_filename(url)
     path_name = join(output, path_name)
-    dir_path = get_dir_name(url, output)
+    dir_path = to_dirname(url, output)
 
     text_html = get_content(url)
     urls, text_html = gathering_resources(url, text_html, dir_path)

@@ -6,7 +6,7 @@ from os.path import exists, join
 from tempfile import TemporaryDirectory
 
 from page_loader.loader import download
-from page_loader.namer import get_file_name
+from page_loader.urls import to_filename
 
 EXPECTED_FILE_NAME = 'www-test-com.html'
 EXPECTED_DIR_NAME = 'www-test-com_files'
@@ -107,4 +107,4 @@ def test_page_loader_link_to_filename():
         'site-asdf-fer.html',
     ]
     for index, link in enumerate(expected_list_link):
-        assert get_file_name(list_link[index]) == link, list_link[index]
+        assert to_filename(list_link[index]) == link, list_link[index]

@@ -25,7 +25,7 @@ def remove_extra_symbols(url):
     return url
 
 
-def get_file_name(url):
+def to_filename(url):
     """
     :param url: url address
     :return: new file name
@@ -48,6 +48,6 @@ def get_file_name(url):
     return f'{file_name}.{ext}'
 
 
-def get_dir_name(url, output):
+def to_dirname(url, output):
     filename = re.sub(r'\W', '-', remove_schema(remove_extra_symbols(url)))
     return f'{output}/{filename}_files'
