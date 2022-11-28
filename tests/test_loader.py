@@ -79,7 +79,7 @@ def test_page_loader_files(
 
 def test_page_loader_exceptions():
     with TemporaryDirectory() as temp_dir:
-        with pytest.raises(ConnectionError):
+        with pytest.raises(FileNotFoundError):
             download('https://google.com', 'wrong_folder')
 
         with pytest.raises(ConnectionError):
