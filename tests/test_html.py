@@ -3,11 +3,11 @@ import requests_mock
 from page_loader.html import gathering_resources
 from page_loader.loader import get_content
 
-
 RAW = 'tests/fixtures/test.html'
 HTML = 'tests/fixtures/expected.html'
 URL = 'https://www.test.com'
 EXPECTED_DIR_NAME = 'www-test-com_files'
+
 
 def read(file, binary=False):
     if not binary:
