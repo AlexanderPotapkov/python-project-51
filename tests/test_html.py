@@ -1,7 +1,4 @@
 import requests_mock
-from tempfile import TemporaryDirectory
-
-from bs4 import BeautifulSoup
 
 from page_loader.html import gathering_resources
 from page_loader.loader import get_content
